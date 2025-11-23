@@ -52,6 +52,7 @@ def show_result_card(title, message, probability, high_risk):
 
 # ---------- Load pipeline ----------
 
+current_dir = os.path.dirname(__file__)
 model_path = os.path.join(current_dir, "lr_heart_disease_model.pkl")
 
 try:
@@ -188,4 +189,5 @@ with tab_about:
     st.markdown("### Notes")
     st.markdown("- If model raises errors about missing columns, ensure the pipeline was trained with these exact column names.")
     st.markdown("- To save a pipeline in training: `joblib.dump(pipeline, 'lr_heart_disease_model.pkl')`")
+
 
