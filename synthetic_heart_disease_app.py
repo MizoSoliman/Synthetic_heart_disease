@@ -1,4 +1,4 @@
-
+import os
 import streamlit as st
 import pandas as pd
 import joblib
@@ -51,10 +51,13 @@ def show_result_card(title, message, probability, high_risk):
         st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------- Load pipeline ----------
+
+model_path = os.path.join(current_dir, "lr_heart_disease_model.pkl")
+
 try:
-    lr_pipeline = joblib.load('lr_heart_disease_model.pkl')
+    lr_pipeline = joblib.load(model_path)
 except Exception as e:
-    st.error("Could not load model pipeline `lr_heart_disease_model.pkl`, Make Sure that file is at the same folder .")
+    st.error(f"Could not load model pipeline `{model_path}`. Error: {e}")
     st.stop()
 
 # ---------- Lottie assets ----------
@@ -185,3 +188,4 @@ with tab_about:
     st.markdown("### Notes")
     st.markdown("- If model raises errors about missing columns, ensure the pipeline was trained with these exact column names.")
     st.markdown("- To save a pipeline in training: `joblib.dump(pipeline, 'lr_heart_disease_model.pkl')`")
+
